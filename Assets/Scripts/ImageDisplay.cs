@@ -15,8 +15,6 @@ public class ImageDisplay : MonoBehaviour
 
     private void Start()
     {
-        DisplayOrientation.ChangeOrientation(DisplayOrientation.Orientations.Portrait);
-
         for (int i = 0; i <= 65; i++)
             _images.Add(Instantiate(_imagePrefab, _content.transform));
 

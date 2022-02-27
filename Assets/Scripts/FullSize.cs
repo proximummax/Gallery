@@ -12,8 +12,6 @@ public class FullSize : MonoBehaviour
 
     private void Start()
     {
-        DisplayOrientation.ChangeOrientation(DisplayOrientation.Orientations.Any);
-
         SetFullSizeImage();
     }
 

@@ -10,10 +10,13 @@ public class DisplayOrientation : MonoBehaviour
         Portrait,
     }
 
+    [SerializeField] private Orientations Orientation;
 
-    public static void ChangeOrientation(Orientations currentOrientation)
+    private void Start()
     {
-        switch (currentOrientation)
+        Application.targetFrameRate = 60;
+
+        switch (Orientation)
         {
             case Orientations.Any:
                 Screen.orientation = ScreenOrientation.AutoRotation;
@@ -31,6 +34,8 @@ public class DisplayOrientation : MonoBehaviour
                 Screen.autorotateToLandscapeLeft = Screen.autorotateToLandscapeRight = false;
                 break;
         }
+
     }
 }
+
 

@@ -9,20 +9,19 @@ using UnityEngine.UI;
 
 public class LoadImages : MonoBehaviour
 {
-    public event UnityAction<UnityWebRequest> ImageReceived;
-    private void Start()
-    {
-        StartCoroutine(DownloadImage());
-    }
+    [SerializeField] private ImageDisplay _display;
 
-    private IEnumerator DownloadImage()
+    public event UnityAction<Texture2D, int> ImageReceived;
+
+
+    public IEnumerator DownloadImage(int imageNumber)
     {
-        for (int imageNumber = 1; imageNumber <= 66; imageNumber++)
-        {
-            UnityWebRequest request = UnityWebRequestTexture.GetTexture("http://data.ikppbb.com/test-task-unity-data/pics/" + imageNumber + ".jpg");
-            yield return request.SendWebRequest();
-            ImageReceived?.Invoke(request);
-        }
+        UnityWebRequest request = UnityWebRequestTexture.GetTexture("http://data.ikppbb.com/test-task-unity-data/pics/" + (imageNumber + 1) + ".jpg");
+        yield return request.SendWebRequest();
+        if (request.isHttpError && request.isNetworkError)
+            Debug.Log("error request");
+        else
+            ImageReceived?.Invoke(DownloadHandlerTexture.GetContent(request), (imageNumber));
     }
 
 }
